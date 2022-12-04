@@ -25,7 +25,6 @@ func NewPortService(repo port.Repository) *portService {
 func (s *portService) Create(ctx context.Context, dto *interfaces.PortCreateDTO) error {
 
 	return s.PortRepository.Create(ctx, dto.Port)
-
 }
 
 // Update takes the input data from UI and passes to the persistence layer
