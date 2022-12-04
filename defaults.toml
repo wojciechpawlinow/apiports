@@ -1,0 +1,64 @@
+# config for https://github.com/mgechev/revive
+ignoreGeneratedHeader = false
+severity = "error"
+confidence = 0.8
+errorCode = 1
+warningCode = 0
+
+[directive.specify-disable-reason]
+severity = "error"
+
+#### golint inherited rules
+[rule.blank-imports]
+[rule.context-as-argument]
+[rule.context-keys-type]
+[rule.dot-imports]
+[rule.error-naming]
+[rule.error-return]
+[rule.error-strings]
+[rule.errorf]
+[rule.if-return]
+[rule.increment-decrement]
+[rule.indent-error-flow]
+[rule.range]
+[rule.receiver-naming]
+[rule.time-naming]
+[rule.var-declaration]
+[rule.var-naming]
+[rule.struct-tag]
+
+# this is basically errcheck, warns on errs that are not checked.
+[rule.unhandled-error]
+
+# general defer gotchas
+[rule.defer]
+arguments=[["loop","method-call","recover","return","immediate-recover"]]
+
+# string(int) is almost always a bug.
+# go vet considers this a fatal error
+[rule.string-of-int]
+
+[rule.atomic] # correct use of sync code, important
+[rule.call-to-gc] # beneficial
+[rule.constant-logical-expr] # minor code simplifier
+[rule.identical-branches] # code simplifier
+[rule.modifies-parameter] # beneficial
+[rule.modifies-value-receiver] # probably beneficial, prevents subtle bugs
+[rule.range-val-address] # beneficial
+[rule.range-val-in-closure] # beneficial
+[rule.unconditional-recursion] # probably a good idea
+[rule.unreachable-code] # code simplifier
+[rule.waitgroup-by-value] # correct use of sync code, important
+[rule.bare-return] # probably beneficial as it's slightly error-prone
+[rule.confusing-results] # maybe beneficial
+[rule.duplicated-imports] # minor, but may be worthwhile
+[rule.early-return] # minor code simplifier
+[rule.get-return] # existing failures are intentional + desirable, but in principle it's a fine idea
+[rule.import-shadowing] # probably beneficial
+[rule.superfluous-else] # minor code simplifier
+[rule.unexported-naming] # probably beneficial
+[rule.unused-parameter] # minor code simplifier
+[rule.unused-receiver] # minor code simplifier
+[rule.confusing-naming] # helpful
+[rule.empty-block] # easily noticed in code review, but also warns on documented no-op branches, which seem fine
+[rule.exported]
