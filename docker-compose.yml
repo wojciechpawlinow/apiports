@@ -1,0 +1,28 @@
+version: "3.9"
+
+# just to show I worked on that. That is not being used for running
+
+services:
+
+  app:
+    container_name: apiports_app
+    build: .
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - common-network
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb:27017 --quiet
+    networks:
+      - common-network
+
+networks:
+  common-network:
+    driver: bridge
