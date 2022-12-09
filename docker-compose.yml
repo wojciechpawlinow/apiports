@@ -5,24 +5,20 @@ version: "3.9"
 services:
 
   app:
-    container_name: apiports_app
     build: .
     depends_on:
-      mongodb:
-        condition: service_healthy
-    networks:
-      - common-network
+      - database
+    container_name: app_apiports
 
-  mongodb:
-    container_name: mongodb
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh mongodb:27017 --quiet
-    networks:
-      - common-network
+  database:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      - app_data:/data/db
 
-networks:
-  common-network:
-    driver: bridge
+
+volumes:
+  app_data:

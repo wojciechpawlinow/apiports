@@ -1,12 +1,11 @@
 package container
 
 import (
-	"fmt"
-	"log"
-
 	"apiports/internal/application/interfaces"
 	"apiports/internal/application/service"
 	"apiports/internal/infrastructure/database/mongo"
+	"fmt"
+	"log"
 )
 
 // Container is a special object that keeps all dependencies)
@@ -24,7 +23,7 @@ func New() *Container {
 	// handle errors gracefully - building container and dependencies
 	// can also contain some Ping() methods in order to check readiness
 	conn, err := mongo.Connect()
-	if err != nil {
+	if err != nil || conn == nil {
 		log.Fatal(fmt.Errorf("dependency failed: %w", err)) // I never use panic, but here I just want to crash the app if cant connect to mongo
 	}
 	// create repository
