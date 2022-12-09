@@ -4,7 +4,7 @@ run:
 	go run cmd/apiports/main.go # had to run go from host as I did not managed to make them working together as containers
 								# although I tried with the same network and but Mongo were not reachable anyway
 
-format:
+lint:
 	go mod tidy
 	go vet ./...
 	go fmt ./...
