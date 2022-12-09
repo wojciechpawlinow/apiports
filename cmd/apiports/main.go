@@ -1,8 +1,6 @@
 package main
 
 import (
-	"apiports/internal/infrastructure/container"
-	"apiports/internal/infrastructure/ui/adapter"
 	"context"
 	"fmt"
 	"os"
@@ -11,6 +9,9 @@ import (
 	"time"
 
 	"github.com/go-echarts/statsview"
+
+	"apiports/internal/infrastructure/container"
+	"apiports/internal/infrastructure/ui/adapter"
 )
 
 func main() {

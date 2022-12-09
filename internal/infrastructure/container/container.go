@@ -1,11 +1,12 @@
 package container
 
 import (
+	"fmt"
+	"log"
+	
 	"apiports/internal/application/interfaces"
 	"apiports/internal/application/service"
 	"apiports/internal/infrastructure/database/mongo"
-	"fmt"
-	"log"
 )
 
 // Container is a special object that keeps all dependencies)
