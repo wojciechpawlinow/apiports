@@ -4,13 +4,13 @@
 
 ### Container with the application
 
-> ⚠️ _Make sure you have Docker installed_  
+> _Make sure you have Docker installed_  
 
 `make run` 
 
 ### Code linter and formatting
 
-> ⚠️ _Make sure you have installed the [revive](https://github.com/mgechev/revive) package_.  
+> _Make sure you have installed the [revive](https://github.com/mgechev/revive) package_.  
 > `go install github.com/mgechev/revive@latest
 `
 

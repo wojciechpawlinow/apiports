@@ -1,10 +1,16 @@
-FROM golang:1.19.3
+FROM golang:1.19.4 AS builder
 
-# simple - without multi-stage, alpine image and proper compilation
-# just to show I worked on that. That is not being used for running
+COPY . /go/src/github.com/wojciechpawlinow/apiports
+WORKDIR /go/src/github.com/wojciechpawlinow/apiports
+
+RUN go build -ldflags '-w -linkmode external -extldflags "-static"' -o bin/apiports ./cmd/apiports
+
+FROM alpine
 
 WORKDIR /app
-COPY . .
-RUN go mod download && go mod verify
 
-ENTRYPOINT ["go", "run", "cmd/apiports/main.go"]
+COPY --from=builder --chown=app:app /go/src/github.com/wojciechpawlinow/apiports/bin/apiports /app/
+
+RUN chmod +x /app/apiports
+
+CMD ["/app/apiports"]
