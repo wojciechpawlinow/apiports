@@ -1,15 +1,14 @@
 package adapter
 
 import (
-	"context"
-	"encoding/json"
-	"log"
-	"os"
-
 	"apiports/internal/application/interfaces"
 	"apiports/internal/domain/port"
 	"apiports/internal/infrastructure/container"
 	"apiports/pkg/iterator"
+	"context"
+	"encoding/json"
+	"log"
+	"os"
 )
 
 const filePath string = "assets/ports.json"
@@ -43,6 +42,8 @@ func FileImport(ctx context.Context, ctn *container.Container) {
 		if err := json.Unmarshal(obj, &p); err != nil {
 			log.Fatal("cannot unmarshal to entity")
 		}
+
+		p.ID = &p.Unlocs[0] // quick fix as I do not iterate through a json map
 
 		// add new port
 		if err := ctn.PortService.Create(ctx, &interfaces.PortCreateDTO{Port: p}); err != nil {

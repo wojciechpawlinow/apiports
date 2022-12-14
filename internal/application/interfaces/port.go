@@ -1,9 +1,8 @@
 package interfaces
 
 import (
-	"context"
-	
 	"apiports/internal/domain/port"
+	"context"
 )
 
 // the name of this file corresponds with the service it exposes as an interface
@@ -11,6 +10,11 @@ import (
 // define DTO interfaces for accessing application layer live
 // in the same space (application layer) where the actual implementation lives
 // that prevents leaking the data from the top to bottom layers and so that prevents coupling as well
+
+// PortOneByIDDTO is the API contract for getting Port
+type PortOneByIDDTO struct {
+	ID string
+}
 
 // PortCreateDTO is the API contract for creating Port
 type PortCreateDTO struct {
@@ -29,6 +33,7 @@ type PortUpdateDTO struct {
 // in a separation from any User Interface (Ports & Adapters architecture) -
 // this place stands the Port, to which you can plug many adapters
 type PortService interface {
+	OneByID(ctx context.Context, dto *PortOneByIDDTO) (*port.Port, error)
 	Create(ctx context.Context, dto *PortCreateDTO) error
 	Update(ctx context.Context, dto *PortUpdateDTO) error
 }

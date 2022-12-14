@@ -1,6 +1,9 @@
 package main
 
 import (
+	"apiports/internal/infrastructure/container"
+	"apiports/internal/infrastructure/httpserver"
+	"apiports/internal/infrastructure/ui/adapter"
 	"context"
 	"fmt"
 	"os"
@@ -9,9 +12,6 @@ import (
 	"time"
 
 	"github.com/go-echarts/statsview"
-
-	"apiports/internal/infrastructure/container"
-	"apiports/internal/infrastructure/ui/adapter"
 )
 
 func main() {
@@ -20,17 +20,17 @@ func main() {
 	mgr := statsview.New()
 	go mgr.Start()
 
-	go func() {
-		// create root context
-		ctx := context.Background()
+	// create root context
+	ctx := context.Background()
 
-		// create container of dependencies
-		ctn := container.New()
+	// create container of dependencies
+	ctn := container.New()
 
-		// application entry point
-		// inserting could be also triggered from HTTP, gRPC or other user interfaces (let's call them adapters)
-		adapter.FileImport(ctx, ctn)
-	}()
+	// wait till import from file ends up
+	adapter.FileImport(ctx, ctn)
+
+	// run HTTP serv in background
+	go httpserver.New(ctn)
 
 	// graceful shutdown
 	quit := make(chan os.Signal, 1)

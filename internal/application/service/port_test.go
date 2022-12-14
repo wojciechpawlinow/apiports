@@ -1,15 +1,14 @@
 package service
 
 import (
+	"apiports/internal/application/interfaces"
+	"apiports/internal/domain/port"
 	"context"
 	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-
-	"apiports/internal/application/interfaces"
-	"apiports/internal/domain/port"
 )
 
 // PortRepository is a repository mock structure
@@ -18,6 +17,15 @@ type PortRepository struct {
 }
 
 var _ port.Repository = (*PortRepository)(nil)
+
+// Create is a mock method implementing the interface
+func (m *PortRepository) OneByID(ctx context.Context, id string) (*port.Port, error) {
+	args := m.Called(ctx, id)
+	if v, ok := (args.Get(0)).(*port.Port); ok {
+		return v, args.Error(1)
+	}
+	return nil, args.Error(1)
+}
 
 // Create is a mock method implementing the interface
 func (m *PortRepository) Create(ctx context.Context, p *port.Port) error {

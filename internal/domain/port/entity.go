@@ -7,14 +7,15 @@ import "apiports/pkg/coordinates"
 // Moreover, City, Country, Regions, Coordinates, Timezone and Province could be
 // potentially merged into a separate Location value object
 type Port struct {
-	Name        *string                  `json:"name,omitempty"`
-	City        *string                  `json:"city,omitempty"`
-	Country     *string                  `json:"country,omitempty"`
-	Alias       []interface{}            `json:"alias,omitempty"`       // type not recognised from the JSON file
-	Regions     []interface{}            `json:"regions,omitempty"`     // type not recognised from the JSON file
-	Coordinates *coordinates.Coordinates `json:"coordinates,omitempty"` // value object created
-	Province    *string                  `json:"province,omitempty"`
-	Timezone    *string                  `json:"timezone,omitempty"`
-	Unlocs      []string                 `json:"unlocs,omitempty"`
-	Code        *string                  `json:"code,omitempty"`
+	ID          *string                  `json:"id"`
+	Name        *string                  `json:"name"`
+	City        *string                  `json:"city"`
+	Country     *string                  `json:"country"`
+	Alias       []interface{}            `json:"alias"`       // type not recognised from the JSON file
+	Regions     []interface{}            `json:"regions"`     // type not recognised from the JSON file
+	Coordinates *coordinates.Coordinates `json:"coordinates"` // value object created
+	Province    *string                  `json:"province"`
+	Timezone    *string                  `json:"timezone"`
+	Unlocs      []string                 `json:"unlocs"`
+	Code        *string                  `json:"code"`
 }

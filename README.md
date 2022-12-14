@@ -6,7 +6,26 @@
 
 > _Make sure you have Docker installed_  
 
-`make run` 
+1. `make run` 
+
+2. Try to get a port `curl localhost:8080/port/AEAJM`
+```json
+{
+  "id": "AEAJM",
+  "name": "Ajman",
+  "city": "Ajman",
+  "country": "United Arab Emirates",
+  "alias": [],
+  "regions": [],
+  "coordinates": {},
+  "province": "Ajman",
+  "timezone": "Asia/Dubai",
+  "unlocs": [
+    "AEAJM"
+  ],
+  "code": "52000"
+}
+```
 
 ### Code linter and formatting
 

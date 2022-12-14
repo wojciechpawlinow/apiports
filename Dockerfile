@@ -13,4 +13,6 @@ COPY --from=builder --chown=app:app /go/src/github.com/wojciechpawlinow/apiports
 
 RUN chmod +x /app/apiports
 
+EXPOSE 8080
+
 CMD ["/app/apiports"]
